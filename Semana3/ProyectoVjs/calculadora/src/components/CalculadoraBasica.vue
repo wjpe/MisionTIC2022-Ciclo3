@@ -1,46 +1,108 @@
 <template>
-  <div>
+  <v-container>
     <titulo />
-    <h1>Calculadora Básica</h1>
+    <v-row>
+      <v-col class="text-center">
+        <h1>Calculadora Básica</h1>
+      </v-col>
+    </v-row>
 
     <hr />
-    <input type="number" v-model="n1"/>
-    <br />
-    <input type="number" v-model="n2"/>
-    <br >
-    <button @click="suma()">Sumar</button>
-    <button @click="resta()">Restar</button>
-    <br />
-    {{resp}}
+    <v-row>
+      <v-col>
+        <v-text-field
+          type="number"
+          label="Numero 1"
+          :rules="rules"
+          hide-details="auto"
+          v-model="n1"
+        ></v-text-field>
+      </v-col>
+      <v-col>
+        <v-text-field
+          type="number"
+          label="Numero 2"
+          :rules="rules"
+          hide-details="auto"
+          v-model="n2"
+        ></v-text-field>
+      </v-col>
+    </v-row>
 
-  </div>
+    <v-row class="text-center">
+      <v-col
+        ><v-btn color="primary" elevation="9" outlined rounded @click="sumar()"
+          >Sumar</v-btn
+        ></v-col
+      >
+      <v-col
+        ><v-btn color="primary" elevation="9" outlined rounded @click="restar()"
+          >Restar</v-btn
+        ></v-col
+      >
+
+      <v-col
+        ><v-btn
+          color="primary"
+          elevation="9"
+          outlined
+          rounded
+          @click="multiplicar()"
+          >Multiplicar</v-btn
+        ></v-col
+      >
+      <v-col
+        ><v-btn
+          color="primary"
+          elevation="9"
+          outlined
+          rounded
+          @click="dividir()"
+          >Dividir</v-btn
+        ></v-col
+      >
+    </v-row>
+
+    <br />
+    {{ resp }}
+  </v-container>
 </template>
 
 <script>
-import Titulo from './Titulo.vue';
+import Titulo from "./Titulo.vue";
 export default {
-    name: "CalculadoraBasica",
-    components: { Titulo },
-    data: () =>{
-        return{
-            n1: null,
-            n2: null,
-            resp: "",
-        };
+  name: "CalculadoraBasica",
+  components: { Titulo },
+  data: () => {
+    return {
+      n1: null,
+      n2: null,
+      resp: "",
+      rules: [
+        value => !!value || 'Requerido.',
+        value => (value && value.length >= 2) || 'Min 2 Caracteres',
+      ],
+    };
+  },
+  methods: {
+    sumar() {
+      this.resp = parseFloat(this.n1) + parseFloat(this.n2);
     },
-    methods: {
-        suma(){
-            this.resp = parseFloat(this.n1) + parseFloat(this.n2) 
-        },
-        resta(){
-            this.resp = parseFloat(this.n1) - parseFloat(this.n2) 
-        }
+    restar() {
+      this.resp = parseFloat(this.n1) - parseFloat(this.n2);
     },
-
+    multiplicar() {
+      this.resp = parseFloat(this.n1) * parseFloat(this.n2);
+    },
+    dividir() {
+      if (n2 == 0) {
+        alert("Not a number");
+      } else {
+        this.resp = parseFloat(this.n1) / parseFloat(this.n2);
+      }
+    }
+  },
 };
-
 </script>
 
-<style>
-
-</style>
+<style></style>
