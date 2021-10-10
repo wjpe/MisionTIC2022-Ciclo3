@@ -79,8 +79,8 @@ export default {
       n2: null,
       resp: "",
       rules: [
-        value => !!value || 'Requerido.',
-        value => (value && value.length >= 2) || 'Min 2 Caracteres',
+        (value) => !!value || "Requerido.",
+        (value) => (value && value.length >= 2) || "Min 2 Caracteres",
       ],
     };
   },
@@ -95,12 +95,12 @@ export default {
       this.resp = parseFloat(this.n1) * parseFloat(this.n2);
     },
     dividir() {
-      if (n2 == 0) {
+      if (this.n2 == 0) {
         alert("Not a number");
       } else {
         this.resp = parseFloat(this.n1) / parseFloat(this.n2);
       }
-    }
+    },
   },
 };
 </script>
